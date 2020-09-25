@@ -1,9 +1,13 @@
 class User < ApplicationRecord
+  rolify
+  has_many :books
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   attr_writer :login
+  attr_accessor :role
+  after_create :assign_user_role
 
   def login
     @login || self.username || self.email
@@ -24,5 +28,10 @@ class User < ApplicationRecord
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
     end
+  end
+
+  private
+  def assign_user_role
+  self.add_role(self.role.parameterize.underscore.to_sym)
   end      
 end

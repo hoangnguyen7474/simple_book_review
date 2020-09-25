@@ -34,6 +34,9 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <%= f.label :role %><br />
+  <%= f.select :role, [:author,:reviewer] %>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

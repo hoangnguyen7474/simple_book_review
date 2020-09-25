@@ -1,0 +1,16 @@
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @book.description %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= "#{@book.user.first_name} #{@book.user.last_name}"%>
+</p>
+
+<%= link_to 'Back', books_path %>
