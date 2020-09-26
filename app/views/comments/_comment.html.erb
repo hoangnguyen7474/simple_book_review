@@ -1,0 +1,15 @@
+<div id = "<%= comment.id %>">
+  [<%= comment.created_at.strftime("%I:%M %p") %>]
+  <%= "#{comment.user.first_name} #{comment.user.last_name}:"%>
+  <%= comment.body %> 
+
+  <% if current_user.has_role?(:admin) || current_user == comment.user %>        
+    <button type="button" onclick="deleteComment(<%= comment.id %>)" > Delete </button> 
+    <button type="button" onclick="editComment(<%= comment.id %>)" > Edit </button>    
+  <% end %>
+</div>
+
+
+
+
+

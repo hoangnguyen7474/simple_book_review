@@ -13,4 +13,21 @@
   <%= "#{@book.user.first_name} #{@book.user.last_name}"%>
 </p>
 
+<% if current_user.has_role?(:reviewer) %>
+  <%= form_tag book_comments_path(@book) do %>
+    <%= text_field_tag :body %>
+    <%= submit_tag "Leave a review", type: "button", onclick: "submitReview()" %>
+  <% end %>
+<% end %>
+
+<div id = "comment-pane">
+  <%= render 'comments/comment_list', collection: @comments %>
+</div>
+
+<% if current_user.has_role?(:author) || current_user.has_role?(:admin) %>
+  <%= link_to 'Edit', edit_book_path(@book) %>
+<% end %> <br>
+
+
 <%= link_to 'Back', books_path %>
+

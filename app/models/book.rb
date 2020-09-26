@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
   belongs_to :user
-  resourcify  
+  resourcify
+  has_many :comments, dependent: :destroy  
 end
