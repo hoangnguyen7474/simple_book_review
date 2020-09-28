@@ -4,8 +4,8 @@
   <%= comment.body %> 
 
   <% if current_user.has_role?(:admin) || current_user == comment.user %>        
-    <button type="button" onclick="deleteComment(<%= comment.id %>)" > Delete </button> 
-    <button type="button" onclick="editComment(<%= comment.id %>)" > Edit </button>    
+    <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-primary" > Delete </button> 
+    <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-primary" > Edit </button>    
   <% end %>
 </div>
 

@@ -1,7 +1,7 @@
 window.editComment = function(commentId){  
     $(`#inputEdit`).html(
     `<input name="replaceComment" type="text" value="" > 
-    <button type="button" onclick="updateComment(${commentId})" > Edit </button>`
+    <button type="button" onclick="updateComment(${commentId})" class= "btn btn-primary" > Edit </button>`
     );
 };
 

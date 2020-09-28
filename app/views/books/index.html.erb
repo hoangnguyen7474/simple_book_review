@@ -1,14 +1,14 @@
 <h1>Books</h1>
 
-<table>
+<table class="table-responsive">
   <thead>
     <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Author</th>
-      <th>Review</th>      
-      <th colspan="3"></th>
+      <th scope="col"></th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Author</th>
+      <th scope="col">Review</th>      
+      <th scope="col" colspan="3"></th>
     </tr>
   </thead>
 
@@ -20,10 +20,10 @@
         <td><%= book.description %></td>
         <td><%= "#{book.user.first_name} #{book.user.last_name}"%></td>
         <td><%= pluralize(book.comments.count, "Review") %></td>
-        <td><%= link_to 'Show', book %></td>
+        <td><%= link_to 'Show', book, class: "btn btn-primary" %></td>
         <% if current_user.has_role?(:admin)||current_user.has_role?(:author)%>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?'}%>          
+        <td><%= link_to 'Edit', edit_book_path(book), class: "btn btn-primary" %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-primary"%>          
         </td>
         <% end %>
       </tr>

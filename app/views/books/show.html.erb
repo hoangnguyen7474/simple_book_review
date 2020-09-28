@@ -4,7 +4,7 @@
 </p>
 
 <p>
-<%= image_tag @book.image.url %>
+<%= image_tag @book.image.url, class: "img-fluid" %>
 </p>
 
 <p>
@@ -20,7 +20,7 @@
 <% if current_user.has_role?(:reviewer) %>
   <%= form_tag book_comments_path(@book) do %>
     <%= text_field_tag :body %>
-    <%= submit_tag "Leave a review", type: "button", onclick: "submitReview()" %>
+    <%= submit_tag "Leave a review", type: "button", onclick: "submitReview()", class: "btn btn-primary" %>
   <% end %>
 <% end %>
 
@@ -29,7 +29,7 @@
 </div>
 
 <% if current_user.has_role?(:author) || current_user.has_role?(:admin) %>
-  <%= link_to 'Edit', edit_book_path(@book) %>
+  <%= link_to 'Edit', edit_book_path(@book) , class: "btn btn-primary" %>
 <% end %> <br>
 
 
