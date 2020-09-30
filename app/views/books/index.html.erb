@@ -15,7 +15,7 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
-        <td><%= image_tag book.image.url(:thumb) %></td>
+        <td><%= image_tag(book.image, width: 200) if book.image.attached? %></td>        
         <td><%= book.title %></td>
         <td><%= book.description %></td>
         <td><%= "#{book.user.first_name} #{book.user.last_name}"%></td>

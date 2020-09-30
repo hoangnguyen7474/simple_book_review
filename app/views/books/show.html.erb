@@ -3,8 +3,8 @@
   <%= @book.title %>
 </p>
 
-<p>
-<%= image_tag @book.image.url, class: "img-fluid" %>
+<p> 
+<%= image_tag(book.image, width: 300, class: "img-fluid") if @book.image.attached? %>  
 </p>
 
 <p>
