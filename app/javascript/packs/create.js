@@ -1,5 +1,5 @@
 window.submitReview = function(){
-  const commentBody = $("input[name='body']").val();
+  const commentBody = $("textarea[name='body']").val();
 
   $.ajax({
     type: "POST",

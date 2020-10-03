@@ -4,7 +4,7 @@
 </p>
 
 <p> 
-<%= image_tag(book.image, width: 300, class: "img-fluid") if @book.image.attached? %>  
+<%= image_tag(@book.photo, width: 300, class: "img-fluid") if @book.photo.attached? %>  
 </p>
 
 <p>
@@ -16,11 +16,17 @@
   <strong>Author:</strong>
   <%= "#{@book.user.first_name} #{@book.user.last_name}"%>
 </p>
+<p>
+  <strong>Category:</strong>
+  <%= @book.category.category %>
+</p>
 
 <% if current_user.has_role?(:reviewer) %>
   <%= form_tag book_comments_path(@book) do %>
-    <%= text_field_tag :body %>
-    <%= submit_tag "Leave a review", type: "button", onclick: "submitReview()", class: "btn btn-primary" %>
+  <div class="form-group">
+  <%= text_area_tag 'body', nil, rows: 5, cols: 50  %>
+  </div>
+  <%= submit_tag "Leave a review", type: "button", onclick: "submitReview()", class: "btn btn-primary" %>
   <% end %>
 <% end %>
 
@@ -29,7 +35,7 @@
 </div>
 
 <% if current_user.has_role?(:author) || current_user.has_role?(:admin) %>
-  <%= link_to 'Edit', edit_book_path(@book) , class: "btn btn-primary" %>
+  <%= link_to 'Edit Book', edit_book_path(@book) , class: "btn btn-primary" %>
 <% end %> <br>
 
 

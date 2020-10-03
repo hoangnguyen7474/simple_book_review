@@ -4,20 +4,26 @@ class BooksController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if current_user.has_role?(:admin)
-      @books = Book.all 
+    set_category
+    cate = params[:cate]
+    @book_category = Book.where(category_id: cate) 
+
+    if !cate.nil?
+      @books = Book.where(category_id: cate)  
+    elsif current_user.has_role?(:admin)    
+      @books = Book.all       
     elsif current_user.has_role?(:reviewer)
-      @books = Book.all
+      @books = Book.all      
     else
-      @books = current_user.books.all  
-    end
+      @books = current_user.books.all
+    end    
   end
 
   def show
     set_comment
   end
 
-  def new
+  def new    
     @book = current_user.books.new
   end  
 
@@ -56,8 +62,12 @@ class BooksController < ApplicationController
     @comments = @book.comments
   end
 
+  def set_category
+    @categories = Category.all      
+  end
+
   private
   def book_params
-    params.require(:book).permit(:title, :description, :image)
+    params.require(:book).permit(:title, :description, :photo, :category_id)
   end
 end

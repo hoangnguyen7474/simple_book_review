@@ -1,0 +1,27 @@
+<%= form_for @category, html: { multipart: true } do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="table-responsive">
+   <table class="table">
+    <thead>    
+    <tr>
+      <th scope="row"><%= form.label :category %></th>
+      <td><%= form.text_field :category %></td>      
+    </tr>
+    </thead>
+    </table> 
+  </div> 
+  <div>
+    <%= form.submit %>
+  </div> 
+<% end %>

@@ -6,7 +6,7 @@ class Ability
       if user.has_role? :admin
         can :manage, :all
       elsif user.has_role? :author
-        can :manage, Book, user_id: user.id            
+        can :manage, Book, user_id: user.id                   
       elsif user.has_role? :reviewer
         can :read, Book
         can :manage, Comment, user_id: user.id             

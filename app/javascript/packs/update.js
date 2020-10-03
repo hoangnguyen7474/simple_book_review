@@ -1,12 +1,12 @@
 window.editComment = function(commentId){  
     $(`#inputEdit`).html(
-    `<input name="replaceComment" type="text" value="" > 
+    `<br/> <textarea name="replaceComment" type="text" value="" rows="5" cols="50" > </textarea>
     <button type="button" onclick="updateComment(${commentId})" class= "btn btn-primary" > Edit </button>`
     );
 };
 
 window.updateComment = function(commentId){
-  const commentBody = $("input[name='replaceComment']").val();
+  const commentBody = $("textarea[name='replaceComment']").val();
 
   $.ajax({
     type: "PUT",
