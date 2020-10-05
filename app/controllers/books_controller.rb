@@ -1,26 +1,22 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: [:show]
+  before_action :set_category, only: [:index]
   before_action :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource
 
-  def index
-    set_category
-    cate = params[:cate]
-    @book_category = Book.where(category_id: cate) 
-
-    if !cate.nil?
-      @books = Book.where(category_id: cate)  
-    elsif current_user.has_role?(:admin)    
-      @books = Book.all       
-    elsif current_user.has_role?(:reviewer)
-      @books = Book.all      
+  def index   
+    category_id = params[:category_id]   
+    if !category_id.nil?
+      @books = Book.get_by_category(category_id)    
+    elsif current_user.has_role?(:author)
+      @books = current_user.books.book_all
     else
-      @books = current_user.books.all
+      @books = Book.book_all                
     end    
   end
 
-  def show
-    set_comment
+  def show    
   end
 
   def new    
@@ -30,11 +26,11 @@ class BooksController < ApplicationController
   def create
     @book = current_user.books.new(book_params)
    
-      if @book.save        
-        redirect_to @book, notice: 'Book was successfully created.' 
-      else
-        render :new 
-      end      
+    if @book.save        
+      redirect_to @book, notice: 'Book was successfully created.' 
+    else
+      render :new 
+    end      
   end
 
   def edit
@@ -51,7 +47,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_url, notice: 'Book was successfully destroyed.'
+    redirect_to books_url, notice: 'Book was successfully destroyed.'   
   end
 
   def set_book
@@ -67,6 +63,7 @@ class BooksController < ApplicationController
   end
 
   private
+  
   def book_params
     params.require(:book).permit(:title, :description, :photo, :category_id)
   end
