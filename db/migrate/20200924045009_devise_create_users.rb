@@ -13,11 +13,18 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
 
       ## Rememberable
       t.datetime :remember_created_at
+<<<<<<< HEAD
 
+=======
+>>>>>>> categories
       t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
+<<<<<<< HEAD
     add_index :users, :reset_password_token, unique: true   
+=======
+    add_index :users, :reset_password_token, unique: true    
+>>>>>>> categories
   end
 end

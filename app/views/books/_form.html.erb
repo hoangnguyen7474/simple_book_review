@@ -2,7 +2,6 @@
   <% if book.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
       <ul>
         <% book.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -21,11 +20,11 @@
         </div><br>
 
         <div class="form-group">
-        <% if  book.photo.attached? && book.photo.representable? %>
-        <%= image_tag book.photo.variant(resize: '350x350').processed %> 
-        <% else %>
-        <div class="book-photo no-photo"></div> <br>
-        <% end %>   
+          <% if  book.photo.attached? && book.photo.representable? %>
+            <%= image_tag book.photo.variant(resize: '350x350').processed %> 
+          <% else %>
+            <div class="book-photo no-photo"></div> <br>
+          <% end %>   
           <%= form.label :photo %>       
           <%= form.file_field :photo, class: "form-control", class: "btn btn-outline-primary" %>
         </div><br>
@@ -37,13 +36,13 @@
 
         <div class="form-group">
           <%= form.label :category %>
-          <%= form.select :category_id, Category.all.map{|c|[c.category, c.id]}, class: "form-control" %>  
-         </div><br>       
+          <%= form.select :category_id, Category.all.map{|c|[c.category_name, c.id]}, class: "form-control" %>  
+        </div><br>       
       
        <%= form.submit %>
         <%= link_to 'Back', books_path, class: "btn btn-outline-primary" %>
        </div>
     </div>
-  </div>
+    </div>
   </div> 
 <% end %>

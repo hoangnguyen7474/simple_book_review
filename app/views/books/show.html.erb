@@ -18,7 +18,7 @@
 </p>
 <p>
   <strong>Category:</strong>
-  <%= @book.category.category %>
+  <%= @book.category.category_name %>
 </p>
 
 <% if current_user.has_role?(:reviewer) %>

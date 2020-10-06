@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]  
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -18,10 +18,10 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save        
-        redirect_to @category, notice: 'Category was successfully created.' 
-      else
-        render :new 
-      end      
+      redirect_to @category, notice: 'Category was successfully created.' 
+    else
+      render :new 
+    end      
   end
 
   def edit
@@ -29,7 +29,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-       redirect_to @category, notice: 'Category was successfully updated.' 
+      redirect_to @category, notice: 'Category was successfully updated.' 
     else
       render :edit
     end  
@@ -45,6 +45,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:category)
+    params.require(:category).permit(:category_name)
   end
 end

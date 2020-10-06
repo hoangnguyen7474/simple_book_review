@@ -7,8 +7,13 @@
   <%= comment.body %> 
 
   <% if current_user.has_role?(:admin) || current_user == comment.user %>  
+<<<<<<< HEAD
     <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-primary" > Delete </button>   
     <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-primary"> Edit </button>   
+=======
+   <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-primary" > Delete </button>   
+   <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-primary"> Edit </button>   
+>>>>>>> categories
   <% end %>  
   </div>
 <% end %>
