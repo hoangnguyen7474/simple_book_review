@@ -10,8 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    
+  <body>    
     <div class="container">   
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
@@ -21,17 +20,15 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-md-auto">
-          <li class="nav-item active">
-                      
+          <li class="nav-item active">                      
           </li>          
         </ul>       
       </div>
     </nav>
 
     <%= yield %>
-  </div>
+    </div>
   </body>
 </html>
