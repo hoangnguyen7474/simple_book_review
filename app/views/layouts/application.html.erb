@@ -22,10 +22,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-md-auto">
-<<<<<<< HEAD
           <li class="nav-item active">                      
           </li>          
-=======
           <% if current_user %>            
             <%= link_to 'Books', books_path, class: "btn btn-primary" %>&nbsp; 
             <% if current_user.has_role?(:admin) %>
@@ -36,8 +34,7 @@
           <% else %>
             <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %> &nbsp;
             <%= link_to 'Sign In', new_user_session_path, class: "btn btn-primary" %> <br />  
-          <% end %>      
->>>>>>> categories
+          <% end %> 
         </ul>       
       </div>
     </nav>
