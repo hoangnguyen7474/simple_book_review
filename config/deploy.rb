@@ -4,10 +4,9 @@ lock "~> 3.14.1"
 require 'capistrano-db-tasks'
 
 set :application, 'simple_book_review'
-set :repo_url, 'https://github.com/hoangnguyen7474/simple_book_review'
+set :repo_url, 'git@github.com:hoangnguyen7474/simple_book_review.git'
 set :deploy_to, 'home/deploy/simple_book_review'
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
-
 set :linked_files, %w{config/database.yml config/master.key}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
