@@ -4,8 +4,8 @@ This is my very first Ruby on Rails application I built.
 
 ## Features:
 
-* Admin can CRUD all books and comments. 
-* Author can CRUD their books.
+* Admin can CRUD all books, categories and comments 
+* Author can CRUD their books, choose category for each book.
 * Reviewer can browse all books and CRUD a short comment.
 
 ## Techniques behind the scenes:
