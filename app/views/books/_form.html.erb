@@ -39,7 +39,7 @@
           <%= form.select :category_id, Category.all.map{|c|[c.category_name, c.id]}, class: "form-control" %>  
         </div><br>       
       
-       <%= form.submit %>
+        <%= form.submit %>
         <%= link_to 'Back', books_path, class: "btn btn-outline-primary" %>
        </div>
     </div>
