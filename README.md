@@ -11,9 +11,10 @@ This is my very first Ruby on Rails application I built.
 ## Techniques behind the scenes:
 
 * Using gem Devise, Rolify, CanCanCan to manage user authority.
+* Database: PostgreSQL
 * Store book cover on S3 Storage by using those gems: ActiveStorage, aws-sdk-s3, active_storage_validations, image_processing.
 * Using bootstrap helps this app has a clean design.
-* Comment can be shown and deleted without reloading a page by applying Ajax technique.
+* Comment can be shown and deleted without reloading a page by applying Ajax & Restful API technique.
 
 ## Git strategy
 
