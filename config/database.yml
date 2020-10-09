@@ -12,7 +12,7 @@ test:
   database: mybook_test
 
 production:
-  <<: *default
+  <<: *default    
   database: <%= ENV['DATABASE_URL'] %>
   username: deploy
   password: Rails.application.credentials.dig(:production, :db_password)

@@ -1,11 +1,11 @@
-# config valid for current version and patch releases of Capistrano
+  # config valid for current version and patch releases of Capistrano
 lock "~> 3.14.1"
 
 require 'capistrano-db-tasks'
 
 set :application, 'simple_book_review'
 set :repo_url, 'git@github.com:hoangnguyen7474/simple_book_review.git'
-set :deploy_to, 'home/deploy/simple_book_review'
+set :deploy_to, '/home/deploy/simple_book_review'
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 set :linked_files, %w{config/database.yml config/master.key}
