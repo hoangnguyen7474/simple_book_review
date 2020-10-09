@@ -1,8 +1,6 @@
 default: &default
   adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  encoding: unicode  
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -16,5 +14,5 @@ test:
 production:
   <<: *default
   database: <%= ENV['DATABASE_URL'] %>
-  # username: mybook
-  # password: <%= ENV['MYBOOK_DATABASE_PASSWORD'] %>
+  username: deploy
+  password: Rails.application.credentials.dig(:production, :db_password)
