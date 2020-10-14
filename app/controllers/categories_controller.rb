@@ -1,14 +1,14 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]  
-  before_action :authenticate_user!
+  before_action :authenticate_user
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
+
   load_and_authorize_resource
 
   def index    
     @categories = Category.category_all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @category = Category.new
@@ -24,8 +24,7 @@ class CategoriesController < ApplicationController
     end      
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @category.update(category_params)
@@ -36,8 +35,11 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy
-    redirect_to categories_path, notice: 'Category was successfully destroyed.'
+    if @category.destroy
+      redirect_to categories_path, notice: 'Category was successfully destroyed.'
+    else
+      redirect_to root_path, notice: 'Category was not destroyed.'
+    end
   end
 
   def set_category

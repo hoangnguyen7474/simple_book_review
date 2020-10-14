@@ -1,11 +1,15 @@
 class Book < ApplicationRecord
+  resourcify
+
   belongs_to :user
   belongs_to :category
-  resourcify
+
   has_many :comments, dependent: :destroy
   has_one_attached :photo, dependent: :destroy
+
   validates :photo, presence: true, content_type: [:png, :jpg, :jpeg]
 
-  scope :book_all, -> { order(title: :asc) }
-  scope :get_by_category, -> (category_id) { where(category_id: category_id) }
+  scope :filter_by_title, -> { order(title: :asc) }
+
+  default_scope filter_by_title
 end

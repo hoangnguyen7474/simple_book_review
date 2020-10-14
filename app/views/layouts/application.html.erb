@@ -15,6 +15,8 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
+    aaa
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <%= link_to 'Home', root_path, class: 'nav-link btn btn-primary' %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +27,7 @@
           <li class="nav-item active">                      
           </li>          
           <% if current_user %>            
-            <%= link_to 'Books', books_path, class: "btn btn-primary" %>&nbsp; 
+            <%= link_to 'Books', books_path, class: "btn btn-primary" %>&nbsp;
             <% if current_user.has_role?(:admin) %>
               <%= link_to 'Category', categories_path, class: "btn btn-primary" %> &nbsp;
             <% end %>

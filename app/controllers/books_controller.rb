@@ -6,14 +6,17 @@ class BooksController < ApplicationController
   load_and_authorize_resource
 
   def index   
-    category_id = params[:category_id]   
-    if params[:category_id]
-      @books = Book.get_by_category(category_id)    
-    elsif current_user.has_role?(:author)
-      @books = current_user.books.book_all
-    else
-      @books = Book.book_all                
-    end    
+    @books =
+      if params[:category_id]
+        Book.find_by_category_id(params[:category_id])    
+      elsif current_user.has_role?(:author)
+        current_user.books.all
+      else
+        Book.all                
+      end    
+  end
+
+  def show    
   end
 
   def show; end

@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
   db:
@@ -18,14 +18,14 @@ services:
     command: bundle exec bin/webpack-dev-server
     working_dir: /var/www/html
     environment:
-      RAILS_ENV: "development"
+      RAILS_ENV:     "development"
       PSQL_PASSWORD: "postgrespwd"
       PSQL_USERNAME: "postgres"
-      PSQL_HOST: "db"
-      PSQL_PORT: "5432"
-      PORT: "3000"
+      PSQL_HOST:     "db"
+      PSQL_PORT:     "5432"
+      PORT:          "3000"
     volumes:
-      - .:/var/www/html
+      - .:/var/www/html:rw
       - modules_cache:/var/www/html/node_modules
       - bundle_cache:/bundle
     depends_on:
@@ -42,14 +42,14 @@ services:
     command: sh serve.sh
     working_dir: /var/www/html
     environment:
-      RAILS_ENV: "development"
+      RAILS_ENV:     "development"
       PSQL_PASSWORD: "postgrespwd"
       PSQL_USERNAME: "postgres"
-      PSQL_HOST: "db"
-      PSQL_PORT: "5432"
-      PORT: "3000"
+      PSQL_HOST:     "db"
+      PSQL_PORT:     "5432"
+      PORT:          "3000"
     volumes:
-      - .:/var/www/html
+      - .:/var/www/html:rw
       - modules_cache:/var/www/html/node_modules
       - bundle_cache:/bundle
     ports:
