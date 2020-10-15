@@ -3,10 +3,15 @@ require 'capistrano/deploy'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rbenv'
-set :rbenv_type, :user
-set :rbenv_ruby, '2.7.1'
+require 'capistrano/rails/assets'
+require 'capistrano/rails/migrations'
+
+require 'capistrano/puma'
+install_plugin Capistrano::Puma  # Default puma tasks
 
 require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
 
+# Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
+

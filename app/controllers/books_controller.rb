@@ -1,13 +1,13 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :set_comment, only: [:show]
-  before_action :set_category, only: [:index]
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :set_comment, only: [:show]
+  before_action :set_category, only: [:index]  
   load_and_authorize_resource
 
   def index   
     category_id = params[:category_id]   
-    if !category_id.nil?
+    if params[:category_id]
       @books = Book.get_by_category(category_id)    
     elsif current_user.has_role?(:author)
       @books = current_user.books.book_all
@@ -16,8 +16,7 @@ class BooksController < ApplicationController
     end    
   end
 
-  def show    
-  end
+  def show; end
 
   def new    
     @book = current_user.books.new
@@ -33,8 +32,7 @@ class BooksController < ApplicationController
     end      
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @book.update(book_params)
