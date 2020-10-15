@@ -1,5 +1,4 @@
 window.deleteComment = function(commentId){
-
   $.ajax({
     type: "DELETE",
     accepts: {

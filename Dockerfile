@@ -2,7 +2,7 @@ FROM ruby:2.7.1
 
 ENV APP_DIR=/var/www/html
 
-RUN apt-get update && apt-get install -y libpq-dev
+RUN apt-get update && apt-get install -y build-essential libpq-dev
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
  && apt-get install -y nodejs
@@ -16,17 +16,17 @@ RUN mkdir -p ${APP_DIR} \
 
 WORKDIR ${APP_DIR}
 
-COPY Gemfile ${APP_DIR}/Gemfile
-COPY Gemfile.lock ${APP_DIR}/Gemfile.lock
+COPY Gemfile      Gemfile
+COPY Gemfile.lock Gemfile.lock
 
 RUN gem install bundler && bundle install
 
-COPY package.json ${APP_DIR}/package.json
-COPY yarn.lock ${APP_DIR}/yarn.lock
+COPY package.json package.json
+COPY yarn.lock    yarn.lock
 
 RUN yarn install
 
-COPY . ${APP_DIR}
+COPY . .
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

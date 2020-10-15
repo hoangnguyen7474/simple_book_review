@@ -7,9 +7,9 @@ class Book < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :photo, dependent: :destroy
 
-  validates :photo, presence: true, content_type: [:png, :jpg, :jpeg]
+  # validates :photo, presence: true, content_type: [:png, :jpg, :jpeg]
 
-  scope :filter_by_title, -> { order(title: :asc) }
+  scope :by_category, -> (id) { where(category_id: id) }
 
-  default_scope filter_by_title
+  default_scope { order(title: :asc) }
 end

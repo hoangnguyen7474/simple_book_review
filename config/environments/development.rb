@@ -16,7 +16,7 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.active_storage.service = :amazon_dev
+  # config.active_storage.service = :amazon_dev
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -30,11 +30,8 @@ Rails.application.configure do
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
-
-  
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -63,5 +60,6 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.file_watcher = ActiveSupport::FileUpdateChecker
 end

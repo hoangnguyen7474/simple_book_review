@@ -25,9 +25,11 @@ services:
       PSQL_PORT:     "5432"
       PORT:          "3000"
     volumes:
-      - .:/var/www/html:rw
+      - .:/var/www/html
       - modules_cache:/var/www/html/node_modules
       - bundle_cache:/bundle
+    ports:
+      - "3035:3035"
     depends_on:
       - db
     networks:
@@ -49,7 +51,7 @@ services:
       PSQL_PORT:     "5432"
       PORT:          "3000"
     volumes:
-      - .:/var/www/html:rw
+      - .:/var/www/html
       - modules_cache:/var/www/html/node_modules
       - bundle_cache:/bundle
     ports:

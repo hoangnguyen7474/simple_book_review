@@ -4,44 +4,67 @@
     <title>Mybook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>    
-    <div class="container">   
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <body>
+    <div class="container">
+      <% if notice %>
+        <p style="margin-top: 0.75em;" class="alert alert-info"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p style="margin-top: 0.75em;" class="alert alert-danger"><%= notice %></p>
+      <% end %>
+    </div>
 
-    aaa
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <%= link_to 'Home', root_path, class: 'nav-link btn btn-primary' %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <div class="container">
         <ul class="navbar-nav ml-md-auto">
-          <li class="nav-item active">                      
-          </li>          
-          <% if current_user %>            
-            <%= link_to 'Books', books_path, class: "btn btn-primary" %>&nbsp;
-            <% if current_user.has_role?(:admin) %>
-              <%= link_to 'Category', categories_path, class: "btn btn-primary" %> &nbsp;
-            <% end %>
-            <%= link_to 'Update Profile', edit_user_registration_path, method: :get, class: "btn btn-primary" %> &nbsp;
-            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "btn btn-primary" %>  &nbsp;
-          <% else %>
-            <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %> &nbsp;
-            <%= link_to 'Sign In', new_user_session_path, class: "btn btn-primary" %> <br />  
-          <% end %> 
-        </ul>       
+          <li class="nav-item">
+            <%= link_to 'Home', root_path, class: 'nav-link text-light' %>
+          </li>
+        </ul>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-md-auto">
+            <% if current_user %>
+              <li class="nav-item">        
+                <%= link_to 'Books', books_path, class: "nav-link text-light" %>
+              </li>
+
+              <% if current_user.has_role?(:admin) %>
+                <li class="nav-item">
+                  <%= link_to 'Category', categories_path, class: "nav-link text-light" %>
+                </li>
+              <% end %>
+
+              <li class="nav-item">
+                <%= link_to 'Update Profile', edit_user_registration_path, method: :get, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign In', new_user_session_path, class: "nav-link text-light" %>
+              </li>
+            <% end %> 
+          </ul>
+        </div>
       </div>
     </nav>
 
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
     </div>
   </body>
 </html>
