@@ -1,19 +1,17 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_comment, only: [:show]
-  before_action :set_category, only: [:index]  
-  load_and_authorize_resource
 
-  def index   
-    category_id = params[:category_id]   
-    if params[:category_id]
-      @books = Book.get_by_category(category_id)    
-    elsif current_user.has_role?(:author)
-      @books = current_user.books.book_all
-    else
-      @books = Book.book_all                
-    end    
+  load_and_authorize_resource except: [:show]
+
+  def index
+    @books =
+      if current_user.has_any_role?(:admin, :reviewer)
+        Book.all
+      else
+        current_user.books.all
+      end
   end
 
   def show; end
@@ -25,8 +23,8 @@ class BooksController < ApplicationController
   def create
     @book = current_user.books.new(book_params)
    
-    if @book.save        
-      redirect_to @book, notice: 'Book was successfully created.' 
+    if @book.save
+      redirect_to @book, notice: 'Book was successfully created.'
     else
       render :new 
     end      
@@ -36,15 +34,18 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.' 
+      redirect_to @book, notice: 'Book was successfully updated.'
     else
       render :edit
     end  
   end
 
   def destroy
-    @book.destroy
-    redirect_to books_url, notice: 'Book was successfully destroyed.'   
+    if @book.destroy
+      redirect_to books_url, notice: 'Book was successfully destroyed.'
+    else
+      redirect_to root_url, notice: 'Book was not destroyed.'
+    end
   end
 
   def set_book
@@ -60,7 +61,7 @@ class BooksController < ApplicationController
   end
 
   private
-  
+
   def book_params
     params.require(:book).permit(:title, :description, :photo, :category_id)
   end

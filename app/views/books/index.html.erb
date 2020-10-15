@@ -1,58 +1,31 @@
-<h1>Books</h1>
-<% if current_user.has_role?(:admin)||current_user.has_role?(:author) %>                    
-  <%= link_to 'New Book', new_book_path, class: "btn btn-outline-primary" %>  
-<% end %>
-<%= link_to 'Back', url_for(:back) , class: "btn btn-outline-primary" %>
+<div style="margin: 60px 0 30px 0;">
+  <% if current_user.has_role?(:admin) || current_user.has_role?(:author) %>
+    <div style="margin: 30px 0 15px 0;">
+      <%= link_to 'New Book', new_book_path, class: "btn btn-outline-primary" %>
+    </div>
+  <% end %>
 
-<div class= "cointainer">
   <div class= "row">
-
-    <div class="col-md-9">
-    <div class= "row">  
-     <% @books.each do |book| %>
-     <div class= "col-md-5">
-       <div class="card mt-3">          
+    <% @books.each do |book| %>
+      <div class= "col-md-4">
+        <div class="card mt-3">
           <div class="card-body text-center">
-           <h3> <%= link_to book.title, book_path(book.id) %> </h3> 
-           <%= "Author: #{book.user.first_name} #{book.user.last_name}" %> <br />
-           <%= image_tag(book.photo, width: 200) if book.photo.attached? %>
+            <h3> <%= link_to book.title, book_path(book.id) %></h3>
+
+            <%= "Author: #{book.user.first_name} #{book.user.last_name}" %>
+
             <div class="card-body">
-           <%= link_to 'Show', book, class: "btn btn-primary" %>
-           <% if current_user.has_role?(:admin)||current_user.has_role?(:author) %>
-            <%= link_to 'Edit', edit_book_path(book), class: "btn btn-primary" %>
-            <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-primary"%>       
-           <% end %>
+              <%= link_to 'Show', book, class: "btn btn-primary" %>
+
+              <% if current_user.has_any_role?(:admin, :author) %>
+                <%= link_to 'Edit', edit_book_path(book), class: "btn btn-warning" %>
+                <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%> 
+              <% end %>
             </div>
           </div>
         </div>
       </div>     
-     <% end %>
-     </div>
-     </div>
-
-    <% if !current_user.has_role?(:author) %>  
-      <div class="col-md-3">
-      <div class="card mt-3">        
-      <div class="card">
-        <div class="card-header">
-          Categories
-        </div> 
-        <div class="card-body">
-        <% if !current_user.has_role?(:author) %>
-          <% @categories.each do |category| %>         
-          <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          <%= link_to category.category_name, books_path(category_id: category.id) %>
-          <span class="badge badge-primary badge-pill"> <%= category.books.count %></span>
-          </li>
-          </ul>       
-          <% end %>
-        <% end %> 
-      </div> 
-      </div>
-      </div>      
-      </div>
-    <% end %>   
-
+    <% end %>
   </div>
+
 </div>

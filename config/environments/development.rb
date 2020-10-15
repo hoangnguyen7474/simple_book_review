@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Verifies that versions and hashed value of the package contents in the project's package.json
+  config.webpacker.check_yarn_integrity = false
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -13,7 +16,8 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-config.active_storage.service = :amazon_dev
+  config.active_storage.service = :amazon_dev
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
@@ -26,11 +30,8 @@ config.active_storage.service = :amazon_dev
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
-
-  
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -59,5 +60,6 @@ config.active_storage.service = :amazon_dev
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.file_watcher = ActiveSupport::FileUpdateChecker
 end

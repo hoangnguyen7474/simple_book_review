@@ -1,4 +1,5 @@
 window.submitReview = function(){
+
   const commentBody = $("textarea[name='body']").val();
 
   $.ajax({
@@ -15,7 +16,7 @@ window.submitReview = function(){
       $("#comment-pane").append(data.comment)
     },
     error: function(jqXHR, textStatus, errorThrown) {
-        console.log('AJAX call failed.');
-      },
+      console.log('AJAX call failed.');
+    },
   });
 };
