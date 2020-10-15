@@ -1,5 +1,5 @@
 <div style="margin: 60px 0 30px 0;">
-  <% if current_user.has_role?(:admin)||current_user.has_role?(:author) %>
+  <% if current_user.has_role?(:admin) || current_user.has_role?(:author) %>
     <div style="margin: 30px 0 15px 0;">
       <%= link_to 'New Book', new_book_path, class: "btn btn-outline-primary" %>
     </div>
@@ -17,7 +17,7 @@
             <div class="card-body">
               <%= link_to 'Show', book, class: "btn btn-primary" %>
 
-              <% if current_user.has_role?(:admin) || current_user.has_role?(:author) %>
+              <% if current_user.has_any_role?(:admin, :author) %>
                 <%= link_to 'Edit', edit_book_path(book), class: "btn btn-warning" %>
                 <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%> 
               <% end %>

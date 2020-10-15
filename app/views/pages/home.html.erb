@@ -4,7 +4,13 @@
       <% @books.each do |book| %>
         <div style="margin-bottom: 30px;" class="col-sm-4">
           <div class="card" style="width: 100%;">
-            <img class="card-img-top" src="//cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="Card image cap">
+
+            <% if book.photo.attached? && book.photo.representable? %>
+              <%= image_tag book.photo.variant(resize: '350x350').processed, class: "card-img-top" %> 
+            <% else %>
+              <img class="card-img-top" src="//cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
+            <% end %>
+
             <div class="card-body">
               <h5 class="card-title"><%= book.title %></h5>
               <p class="card-text"><%= book.description %></p>

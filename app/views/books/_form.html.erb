@@ -20,10 +20,10 @@
         </div><br>
 
         <div class="form-group">
-          <% if  book.photo.attached? && book.photo.representable? %>
+          <% if book.photo.attached? && book.photo.representable? %>
             <%= image_tag book.photo.variant(resize: '350x350').processed %> 
           <% else %>
-            <div class="book-photo no-photo"></div> <br>
+            <div class="book-photo no-photo"></div>
           <% end %>   
           <%= form.label :photo %>       
           <%= form.file_field :photo, class: "form-control", class: "btn btn-outline-primary" %>
@@ -36,7 +36,7 @@
 
         <div class="form-group">
           <%= form.label :category %>
-          <%= form.select :category_id, Category.all.map{|c|[c.category_name, c.id]}, class: "form-control" %>  
+          <%= form.select :category_id, Category.all.map{ |c| [c.category_name, c.id]}, class: "form-control" %>  
         </div><br>       
       
         <%= form.submit %>
