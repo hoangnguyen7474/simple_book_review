@@ -1,24 +1,21 @@
-# README
+# Book Review
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is my very first Ruby on Rails application I built.
 
-Things you may want to cover:
+## Features:
 
-* Ruby version
+* Admin can CRUD all books, categories and comments 
+* Author can CRUD their books, choose category for each book.
+* Reviewer can browse all books and CRUD a short comment.
 
-* System dependencies
+## Techniques behind the scenes:
 
-* Configuration
+* Using gem Devise, Rolify, CanCanCan to manage user authority.
+* Database: PostgreSQL
+* Store book cover on S3 Storage by using those gems: ActiveStorage, aws-sdk-s3, active_storage_validations, image_processing.
+* Using bootstrap to help this app has a clean design.
+* Comment can be shown and deleted without reloading a page by applying Ajax & Restful API technique.
 
-* Database creation
+## Git strategy
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+For this app, I made a new branch per feature. This will be helpful I think for the amount of history that's bound to occur and change over time. 
