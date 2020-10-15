@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :set_comment, only: [:show]
 
-  load_and_authorize_resource :except => [:show]
+  load_and_authorize_resource except: [:show]
 
   def index
     @books =
