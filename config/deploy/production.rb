@@ -1,6 +1,6 @@
 set :stage,     :production
 set :rails_env, :production
-set :branch,    :demodeploy
+set :branch,    :master
 
 server '54.175.114.251', port: '22', roles: [:web, :app, :db], primary: true
 
@@ -52,8 +52,8 @@ namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/demodeploy`
-        puts "WARNING: HEAD is not the same as origin/demodeploy"
+      unless `git rev-parse HEAD` == `git rev-parse origin/master`
+        puts "WARNING: HEAD is not the same as origin/master"
         puts "Run `git push` to sync changes."
         exit
       end
