@@ -19,8 +19,6 @@ class BooksController < ApplicationController
 
   def show; end
 
-  def show; end
-
   def new    
     @book = current_user.books.new
   end  
