@@ -1,9 +1,9 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_book, only: [:show, :edit, :update, :destroy]  
   before_action :set_comment, only: [:show]
   before_action :set_category, only: [:index]  
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:show]
 
   def index   
     @books =

@@ -1,5 +1,18 @@
-<h1>Book Reviewer</h1>
-
-<% if current_user %>
-  <h2><%= "Welcome #{current_user.first_name}"  %> </h2>  
-<% end %>
+<div style="margin: 60px 0 30px 0">
+  <% if @books %>
+    <div class="row">
+      <% @books.each do |book| %>
+        <div style="margin-bottom: 30px;" class="col-sm-4">
+          <div class="card" style="width: 100%;">
+            <%= image_tag(book.photo, width: 200, height:400, class: "card-img-top") if book.photo.attached? %>
+            <div class="card-body">
+              <h5 class="card-title"><%= book.title %></h5>
+              <p class="card-text"><%= book.description %></p>
+              <%= link_to "Show", book_url(book), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
