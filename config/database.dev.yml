@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port:     <%= ENV.fetch("PSQL_PORT") { 5432 } %>
+  host:     <%= ENV.fetch("PSQL_HOST") { "127.0.0.1" } %>
+  username: <%= ENV.fetch("PSQL_USERNAME") { "postgres" } %>
+  password: <%= ENV.fetch("PSQL_PASSWORD") { "postgres" } %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("PSQL_DB_DEV_NAME") { "mybook_dev" } %>
+
+test:
+  <<: *default
+  database: <%= ENV.fetch("PSQL_DB_TEST_NAME") { "mybook_test" } %>
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("PSQL_DB_PROD_NAME") { "mybook_prod" } %>

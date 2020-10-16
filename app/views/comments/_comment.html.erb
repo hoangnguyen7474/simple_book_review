@@ -3,9 +3,11 @@
   <%= comment.created_at.strftime("reviewed on %m/%d/%Y") %></br>
   <%= comment.body %> 
 
-  <% if current_user.has_role?(:admin) || current_user == comment.user %>        
-    <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-primary" > Delete </button> 
-    <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-primary" > Edit </button>    
+  <% if current_user %>
+    <% if current_user.has_role?(:admin) || current_user == comment.user %>        
+      <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-primary" > Delete </button> 
+      <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-primary" > Edit </button>    
+    <% end %>
   <% end %>
 </div>
 

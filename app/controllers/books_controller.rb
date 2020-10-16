@@ -6,14 +6,14 @@ class BooksController < ApplicationController
   load_and_authorize_resource except: [:show]
 
   def index   
-    @books =
+    @books = 
       if params[:category_id]
         Book.by_category(params[:category_id])    
       elsif current_user.has_role?(:author)
         current_user.books.all
       else
         Book.all                
-      end        
+      end
   end
 
   def show; end
@@ -25,7 +25,7 @@ class BooksController < ApplicationController
   def create
     @book = current_user.books.new(book_params)
    
-    if @book.save        
+    if @book.save      
       redirect_to @book, notice: 'Book was successfully created.' 
     else
       render :new 
@@ -43,8 +43,11 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.destroy
-    redirect_to books_url, notice: 'Book was successfully destroyed.'   
+    if @book.destroy
+      redirect_to books_url, notice: 'Book was successfully destroyed.'
+    else
+      redirect_to root_url, notice: 'Book was not destroyed.'
+    end   
   end
 
   def set_book

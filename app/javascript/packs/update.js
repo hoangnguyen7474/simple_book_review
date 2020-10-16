@@ -1,11 +1,15 @@
 window.editComment = function(commentId){  
     $(`#inputEdit`).html(
-    `<br/> <textarea name="replaceComment" type="text" value="" rows="5" cols="50" > </textarea>
-    <button type="button" onclick="updateComment(${commentId})" class= "btn btn-primary" > Edit </button>`
+      `
+        <br/> 
+        <textarea name="replaceComment" type="text" value="" rows="5" cols="50" > </textarea>
+        <button type="button" onclick="updateComment(${commentId})" class= "btn btn-primary" > Edit </button>
+      `
     );
 };
 
 window.updateComment = function(commentId){
+
   const commentBody = $("textarea[name='replaceComment']").val();
 
   $.ajax({
@@ -22,7 +26,7 @@ window.updateComment = function(commentId){
       $(`#${commentId}`).replaceWith(data.comment);
     },
     error: function(jqXHR, textStatus, errorThrown) {
-        console.log('AJAX call failed.');
-      },
+      console.log('AJAX call failed.');
+    },
   });
 };

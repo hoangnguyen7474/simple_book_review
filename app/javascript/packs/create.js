@@ -15,7 +15,7 @@ window.submitReview = function(){
       $("#comment-pane").append(data.comment)
     },
     error: function(jqXHR, textStatus, errorThrown) {
-        console.log('AJAX call failed.');
-      },
+      console.log('AJAX call failed.');
+    },
   });
 };

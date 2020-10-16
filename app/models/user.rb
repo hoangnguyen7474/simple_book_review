@@ -1,11 +1,15 @@
 class User < ApplicationRecord
-  rolify
-  has_many :books 
-  has_many :comments, dependent: :destroy  
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
   attr_writer :login
   attr_accessor :role
+
+  rolify
+  
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  has_many :books 
+  has_many :comments, dependent: :destroy
+ 
   after_create :assign_user_role
   validate :validate_username 
 
@@ -15,6 +19,7 @@ class User < ApplicationRecord
   
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
+    
     if login = conditions.delete(:login)
       where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
