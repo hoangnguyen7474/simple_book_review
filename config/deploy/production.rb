@@ -1,6 +1,6 @@
 set :stage,     :production
 set :rails_env, :production
-set :branch,    :demodeploy
+set :branch,    :docker
 
 server '54.175.114.251', port: '22', roles: [:web, :app, :db], primary: true
 
@@ -11,11 +11,12 @@ set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 #
 set :tmp_dir,         "/home/#{fetch(:user)}/tmp"
+
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
 set :deploy_via,      :remote_cache
-#
+# 
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
@@ -34,7 +35,7 @@ set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/master.key config/database.yml}
-set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -52,8 +53,8 @@ namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
+      unless `git rev-parse HEAD` == `git rev-parse origin/docker`
+        puts "WARNING: HEAD is not the same as origin/docker"
         puts "Run `git push` to sync changes."
         exit
       end
