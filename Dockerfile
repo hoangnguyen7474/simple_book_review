@@ -1,7 +1,7 @@
 FROM ruby:2.7.1
 
 ENV APP_DIR=/var/www/html
-
+RUN apt-get install imagemagick
 RUN apt-get update && apt-get install -y build-essential libpq-dev
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \

@@ -12,13 +12,12 @@
     <div class= "row">      
       <% @books.each do |book| %>
         <div class= "col-md-5">
-        <div class="card mt-3">          
-          <div class="card-body text-center">
+        <div class= "card mt-3">          
+          <div class= "card-body text-center">
 
             <h3> <%= link_to book.title, book_path(book.id) %> </h3> 
-            <%= "Author: #{book.user.first_name} #{book.user.last_name}" %> <br />
-            <%= image_tag(book.photo, width: 200) if book.photo.attached? %>
-
+            <%= "Author: #{book.user.first_name} #{book.user.last_name}" %> <br />            
+            <%= image_tag(book.photo, width: 200, height: 400, class: "card-img-top") %> 
             <div class="card-body">
             <%= link_to 'Show', book, class: "btn btn-primary" %>
             <% if current_user.has_role?(:admin)||current_user.has_role?(:author) %>
