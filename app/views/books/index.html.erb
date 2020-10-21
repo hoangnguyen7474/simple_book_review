@@ -17,7 +17,8 @@
 
             <h3> <%= link_to book.title, book_path(book.id) %> </h3> 
             <%= "Author: #{book.user.first_name} #{book.user.last_name}" %> <br />            
-            <%= image_tag(book.photo, width: 200, height: 400, class: "card-img-top") %> 
+            <%= image_tag(book.photo, width: 200, height: 400, class: "card-img-top") %>
+            <%=h truncate(book.description, :length => 200, class: "card-text") %> 
             <div class="card-body">
             <%= link_to 'Show', book, class: "btn btn-primary" %>
             <% if current_user.has_role?(:admin)||current_user.has_role?(:author) %>

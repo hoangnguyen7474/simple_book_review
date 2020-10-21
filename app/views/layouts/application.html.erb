@@ -19,7 +19,7 @@
       <% end %>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="container">
         <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">
@@ -32,7 +32,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-md-auto">
+          <ul class="navbar-nav mr-md-auto">
             <% if current_user %>
               <% if current_user.has_role?(:admin) %>
                 <li class="nav-item">
@@ -58,8 +58,15 @@
                 <%= link_to 'Sign In', new_user_session_path, class: "nav-link text-light" %>
               </li>
             <% end %> 
-          </ul>
+          </ul> 
+
+          <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+        </form>        
         </div>
+
+        
       </div>
       </nav>
 

@@ -21,14 +21,28 @@
 
         <div class="form-group">
           <% if book.photo.attached? && book.photo.representable? %>
-            <%= image_tag book.photo.variant(resize: '350x350').processed %> 
+            <%= image_tag(book.photo, width: 150, height: 500, class: "card-img-top") %> 
+            <div class="upload-hider-labels">
+              <%= link_to '#', class: "replace-upload btn btn-primary" do %>
+                Replace current book cover
+              <% end %>
+              <span class="separator-bar">|</span>
+              <%= link_to "Remove Book Cover without replacing", 
+                           delete_photo_book_url(photo_id: book.photo.id), 
+                           method: :delete, 
+                           data: {confirm: "Are you sure?"}, 
+                           class: "remove-upload btn btn-primary"
+              %>              
+            </div>
           <% else %>
-            <div class="book-photo no-photo"></div> 
-            <br>
-          <% end %>   
-          <%= form.label :photo %>       
-          <%= form.file_field :photo, class: "form-control", class: "btn btn-outline-primary" %>
-        </div><br>
+            <div class="book-photo no-photo"></div>           
+          <% end %> 
+
+            <div class="upload-hider-fields custom-file">
+              <%= form.label :photo, class: "custom-file-label" %>       
+              <%= form.file_field :photo, class: "form-control", class: "btn btn-outline-primary custom-file-input" %>
+            </div>
+        </div>
 
         <div class="form-group">
           <%= form.label :description %>
@@ -37,10 +51,10 @@
 
         <div class="form-group">
           <%= form.label :category %>
-          <%= form.select :category_id, Category.all.map{ |c| [c.category_name, c.id]}, class: "form-control" %>  
-        </div><br>       
+          <%= form.select :category_id, Category.all.map{ |c| [c.category_name, c.id]},{}, {class: "form-control"} %>
+        </div>     
       
-        <%= form.submit %>
+        <%= form.submit class: "btn btn-outline-primary" %>
         <%= link_to 'Back', books_path, class: "btn btn-outline-primary" %>
        </div>
     </div>

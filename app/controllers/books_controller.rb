@@ -62,6 +62,16 @@ class BooksController < ApplicationController
     @categories = Category.all      
   end
 
+  def delete_photo
+    photo = ActiveStorage::Attachment.find(params[:photo_id])
+    if current_user == photo.record || current_user.has_role?(:admin)
+      photo.purge
+      redirect_back(fallback_location: request.referer)
+    else
+      redirect_to root_url  
+    end
+  end
+
   private
   
   def book_params

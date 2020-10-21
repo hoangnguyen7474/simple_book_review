@@ -1,10 +1,2 @@
 @import "~bootstrap/scss/bootstrap";
-
-.book-photo{
-  height: 100px;
-  width: 100px;
-}
-
-.no-photo{  
-  background: #CCC;
-}
+@import "photo"

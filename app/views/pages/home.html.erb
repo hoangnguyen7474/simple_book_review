@@ -11,8 +11,8 @@
             <% end %>
 
             <div class="card-body">
-              <h5 class="card-title"><%= book.title %></h5>
-              <p class="card-text"><%= book.description %></p>
+              <h5 class="card-title"><%= book.title %></h5>              
+              <%=h truncate(book.description, :length => 200, class: "card-text") %>
               <%= link_to "Show", book_url(book), class: "btn btn-primary" %>
             </div>
           </div>
