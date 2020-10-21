@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   resourcify
+  searchkick
 
   belongs_to :user
   belongs_to :category
