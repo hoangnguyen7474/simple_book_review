@@ -1,17 +1,34 @@
 <div id = "inputEdit"></div>
+<div class="container">
+  <div class="dialogbox">
+    <% @comments.each do |comment| %>  
+    <div class="body">     
+      <span class="tip tip-up"></span>
+      <div class="message">        
+        <span>         
+          <div id = "<%= comment.id %>">    
+            <b><%= "#{comment.user.first_name} #{comment.user.last_name} "%></b>
+            <%= comment.created_at.strftime("reviewed on %m/%d/%Y: ") %><br />
+            <%= comment.body %>  <br />
 
-<% @comments.each do |comment| %>  
-  <div id = "<%= comment.id %>">    
-  <b><%= "#{comment.user.first_name} #{comment.user.last_name} "%></b>
-  <%= comment.created_at.strftime("reviewed on %m/%d/%Y: ") %></br>
-  <%= comment.body %> 
+            <% if current_user %>
+              <% if current_user.has_role?(:admin) || current_user == comment.user %>  
+                <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-outline-light btn-sm" > Delete
+                </button>   
+                <button type="button" onclick="editComment( <%= comment.id %>)" class= "btn btn-outline-light btn-sm"> Edit </button>
+              <% end %>
+            <% end %>    
+          </div>
 
-  <% if current_user %>
-    <% if current_user.has_role?(:admin) || current_user == comment.user %>  
-      <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-primary" > Delete </button>   
-      <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-primary"> Edit </button>  
+        </span>
+      </div>      
+    </div>
     <% end %>
-  <% end %>    
+
   </div>
-<% end %>
+</div>
+
+
+  
+
 

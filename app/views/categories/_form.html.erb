@@ -16,12 +16,12 @@
     <thead>    
     <tr>
       <th scope="row"><%= form.label :category %></th>
-      <td><%= form.text_field :category_name %></td>      
+      <td><%= form.text_field :category_name, placeholder: "Category Name" %></td>      
     </tr>
     </thead>
     </table> 
   </div> 
   <div> 
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-outline-primary" %>
   </div> 
 <% end %>

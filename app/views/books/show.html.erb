@@ -1,50 +1,53 @@
-<div class="flex-row d-flex justify-content-center">
-  <div class="col-md-10">
-    <div class="card mt-5">
-      <div class="card-body">
-        <p>
-          <h2> <%= @book.title %> </h2>
-        </p>
+<div class="flex-row d-flex justify-content-center"  style="margin: 60px 0 30px 0" >
+  <div class="container" >
+    <div class="row">
+       <div class="col-sm">
+        <%= image_tag(@book.photo, width: 300, class: "img-fluid") if @book.photo.attached? %> 
+       </div>
 
-        <p> 
-        <%= image_tag(@book.photo, width: 300, class: "img-fluid") if @book.photo.attached? %>  
-        </p>
-
-        <p>
-          <strong>Description:</strong>
-          <%= @book.description %>
-        </p>
-
-        <p>
+       <div class="col-sm">
+         <h2> <%= @book.title %> </h2>
+         <p>
           <strong>Author:</strong>
           <%= "#{@book.user.first_name} #{@book.user.last_name}"%>
-        </p>
-        <p>
-          <strong>Category:</strong>
-          <%= @book.category.category_name %>
-        </p>
+         </p>
+         <p>
+          <strong>Category:</strong>            
+          <%= link_to @book.category.category_name, books_path(category_id: @book.category.id)  %>         
+         </p>
+         <p>
+         <strong>Description:</strong>
+         </p> 
+         <p>         
+         <%= @book.description %> 
+         </p>
 
-        <% if current_user && current_user.has_role?(:reviewer) %>
-          <%= form_tag book_comments_path(@book) do %>
-          <div class="form-group">
-          <%= text_area_tag 'body', nil, rows: 5, cols: 50  %>
-          </div>
-          <%= submit_tag "Leave a review", type: "button", onclick: "submitReview()", class: "btn btn-primary" %>
+          <p>
+            <% if current_user %>
+            <% if current_user.has_any_role?(:admin) %>
+              <%= link_to 'Edit Book', edit_book_path(@book) , class: "btn btn-primary" %>
+            <% elsif current_user.has_any_role?(:author) && @book.user == current_user %>
+              <%= link_to 'Edit Book', edit_book_path(@book) , class: "btn btn-primary" %>
+            <% end %>
           <% end %>
-        <% end %>
-
-        <div id = "comment-pane">
-          <%= render 'comments/comment_list', collection: @comments %>
-        </div>
-
-        <% if current_user %>
-          <% if current_user.has_any_role?(:admin) %>
-            <%= link_to 'Edit Book', edit_book_path(@book) , class: "btn btn-primary" %>
-          <% elsif current_user.has_any_role?(:author) && @book.user == current_user %>
-            <%= link_to 'Edit Book', edit_book_path(@book) , class: "btn btn-primary" %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+          </p>
+       </div> 
+    </div>  
+  </div> 
 </div>
+
+  <div class="input-group">
+    <% if current_user && current_user.has_role?(:reviewer) %>   
+      <textarea class="form-control" name="body"></textarea>
+      <%= submit_tag "Leave a review", type: "button", onclick: "submitReview()", class: "btn btn-primary" %>
+    <% end %> 
+  </div>  
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div id = "comment-pane">
+        <%= render 'comments/comment_list', collection: @comments %>
+      </div>  
+    </div>
+  </div>    
+

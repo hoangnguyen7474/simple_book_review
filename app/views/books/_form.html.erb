@@ -16,7 +16,7 @@
       <div class="card-body">
         <div class="form-group">
           <%= form.label :title %>
-          <%= form.text_field :title, class: "form-control"%>  
+          <%= form.text_field :title, placeholder: "Book Title", class: "form-control"%>  
         </div><br>
 
         <div class="form-group">
@@ -33,20 +33,18 @@
                            data: {confirm: "Are you sure?"}, 
                            class: "remove-upload btn btn-primary"
               %>              
-            </div>
-          <% else %>
-            <div class="book-photo no-photo"></div>           
+            </div>                 
           <% end %> 
 
             <div class="upload-hider-fields custom-file">
               <%= form.label :photo, class: "custom-file-label" %>       
-              <%= form.file_field :photo, class: "form-control", class: "btn btn-outline-primary custom-file-input" %>
-            </div>
-        </div>
+              <%= form.file_field :photo, class: "form-control", class: "btn btn-outline-primary custom-file-input", id: "file_name" %>
+            </div>           
+        </div><br>
 
         <div class="form-group">
           <%= form.label :description %>
-          <%= form.text_area :description, class: "form-control" %>          
+          <%= form.text_area :description, placeholder: "Description", class: "form-control" %>          
         </div><br>
 
         <div class="form-group">
@@ -54,10 +52,16 @@
           <%= form.select :category_id, Category.all.map{ |c| [c.category_name, c.id]},{}, {class: "form-control"} %>
         </div>     
       
-        <%= form.submit class: "btn btn-outline-primary" %>
-        <%= link_to 'Back', books_path, class: "btn btn-outline-primary" %>
+        <%= form.submit class: "btn btn-outline-primary" %>       
        </div>
     </div>
     </div>
   </div> 
 <% end %>
+
+ 
+            
+     <script type="application/javascript">
+    
+</script>
+       

@@ -1,15 +1,38 @@
-<div id = "<%= comment.id %>">
-  <b><%= "#{comment.user.first_name} #{comment.user.last_name} "%></b>
-  <%= comment.created_at.strftime("reviewed on %m/%d/%Y") %></br>
-  <%= comment.body %> 
+<div class="container">
+  <div class="dialogbox">
+    
+    <div class="body">     
+      <span class="tip tip-up"></span>
+      <div class="message">
+        <span>
+          
+          <div id = "<%= comment.id %>">    
+            <b><%= "#{comment.user.first_name} #{comment.user.last_name} "%></b>
+            <%= comment.created_at.strftime("reviewed on %m/%d/%Y: ") %></br>
+            <%= comment.body %> 
 
-  <% if current_user %>
-    <% if current_user.has_role?(:admin) || current_user == comment.user %>        
-      <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-primary" > Delete </button> 
-      <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-primary" > Edit </button>    
-    <% end %>
-  <% end %>
+            <% if current_user %>
+              <% if current_user.has_role?(:admin) || current_user == comment.user %>  
+                <button type="button" onclick="deleteComment(<%= comment.id %>)" class= "btn btn-outline-light btn-sm" > Delete
+                </button>   
+                <button type="button" onclick="editComment(<%= comment.id %>)" class= "btn btn-outline-light btn-sm"> Edit </button>
+              <% end %>
+            <% end %>    
+          </div>
+
+        </span>
+      </div>      
+    </div>
+   
+
+  </div>
 </div>
+
+
+  
+
+
+
 
 
 

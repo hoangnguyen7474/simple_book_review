@@ -13,8 +13,8 @@
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="form-group">
-          <p><%= f.label :username %><br />
-          <%= f.text_field :username, class: "form-control" %></p>
+          <p><%= f.label :first_name %><br />
+          <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %></p>
         </div>
       
         <div class="form-group">

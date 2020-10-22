@@ -58,11 +58,14 @@
                 <%= link_to 'Sign In', new_user_session_path, class: "nav-link text-light" %>
               </li>
             <% end %> 
-          </ul> 
+          </ul>        
 
-          <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+          <div>
+            <%= form_tag "/books", method: :get, class: "form-inline my-2 my-lg-0" do %>
+              <%= text_field_tag "query", params[:query], class: "form-control mr-sm-2" %>
+              <%= submit_tag "Search", class: "btn btn-outline-warning my-2 my-sm-0" %>
+            <% end %>
+          </div>
         </form>        
         </div>
 

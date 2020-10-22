@@ -1,9 +1,11 @@
 window.editComment = function(commentId){  
     $(`#inputEdit`).html(
       `
-        <br/> 
-        <textarea name="replaceComment" type="text" value="" rows="5" cols="50" > </textarea>
+        <br/>
+        <div class="input-group"> 
+        <textarea class="form-control" name="replaceComment"> </textarea>
         <button type="button" onclick="updateComment(${commentId})" class= "btn btn-primary" > Edit </button>
+        </div>
       `
     );
 };
