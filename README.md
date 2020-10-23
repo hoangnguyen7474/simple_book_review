@@ -14,6 +14,7 @@ This is my very first Ruby on Rails application I built.
 * Server: Nginx
 * Database: PostgreSQL
 * Store book cover on S3 Storage by using those gems: ActiveStorage, aws-sdk-s3, active_storage_validations, image_processing.
+* Elasticsearch by gem 'searchkick'.
 * Using bootstrap to help this app has a clean design.
 * Comment can be shown and deleted without reloading a page by applying Ajax & Restful API technique.
 * Deployed to AWS EC2.
